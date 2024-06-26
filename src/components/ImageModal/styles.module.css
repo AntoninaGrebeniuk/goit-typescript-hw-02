@@ -1,0 +1,19 @@
+.box {
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
+  background-color: #ffffff55;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #ffffffad;
+}

@@ -1,0 +1,10 @@
+.list {
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  flex-wrap: wrap;
+}
