@@ -10,31 +10,34 @@ import {
 } from './components';
 
 import { fetchImages } from './services/api';
+import { Image } from './types';
+import { FetchResponse } from './App.types';
 
 export const App = () => {
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [modalData, setModalData] = useState(null);
+  const [query, setQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [modalData, setModalData] = useState<Image | null>(null);
 
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
 
   useEffect(() => {
     if (!query) return;
     const asyncWrapper = async () => {
       setIsLoading(true);
-      setErrorMessage('');
+      setErrorMessage(false);
       try {
-        const { results, total_pages, total } = await fetchImages(query, page);
+        const { results, total_pages, total } =
+          await fetchImages<FetchResponse>(query, page);
 
         if (!total) return;
 
         setImages(prev => [...prev, ...results]);
         setTotalPages(total_pages);
       } catch (error) {
-        setErrorMessage(error.message);
+        setErrorMessage(true);
       } finally {
         setIsLoading(false);
       }
@@ -42,7 +45,7 @@ export const App = () => {
     asyncWrapper();
   }, [page, query]);
 
-  const getQuery = query => {
+  const getQuery = (query: string): void => {
     setQuery(query);
     setImages([]);
     setPage(1);
@@ -51,7 +54,8 @@ export const App = () => {
 
   const onLoadMore = () => setPage(p => p + 1);
 
-  const toggleModal = (modalData = null) => setModalData(modalData);
+  const toggleModal = (modalData: Image | null = null) =>
+    setModalData(modalData);
   const closeModal = () => toggleModal();
 
   return (

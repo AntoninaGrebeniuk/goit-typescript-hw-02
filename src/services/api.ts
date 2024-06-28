@@ -1,16 +1,21 @@
-import axios from "axios";
+import axios from 'axios';
+// import { Image } from '../types';
 
 const api = axios.create({
-  baseURL: "https://api.unsplash.com",
+  baseURL: 'https://api.unsplash.com',
   params: {
-    client_id: "q_ilJfeXbJ7aLVkUf1TArJA5EUScrQgLm08H3UJvYpI",
+    client_id: 'q_ilJfeXbJ7aLVkUf1TArJA5EUScrQgLm08H3UJvYpI',
   },
 });
 
-export const fetchImages = async (query, page, per_page = 12) => {
-  const { data } = await api.get("/search/photos", {
-    params: { query, page, per_page, orientation: "landscape" },
+export async function fetchImages<T>(
+  query: string,
+  page: number,
+  per_page: number = 12
+): Promise<T> {
+  const { data } = await api.get<T>('/search/photos', {
+    params: { query, page, per_page, orientation: 'landscape' },
   });
 
   return data;
-};
+}

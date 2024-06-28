@@ -1,8 +1,14 @@
-export const SearchBar = ({ getQuery }) => {
-  const onSubmit = e => {
+import { FC } from 'react';
+import { FormEvent } from 'react';
+import { SearchBarProps } from './SearchBar.types';
+
+export const SearchBar: FC<SearchBarProps> = ({ getQuery }) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const query = e.target.query.value.trim().toLowerCase();
+    const form = e.target as HTMLFormElement;
+    const query = form.query.value.trim().toLowerCase();
     getQuery(query);
+    e.currentTarget.reset();
   };
 
   return (

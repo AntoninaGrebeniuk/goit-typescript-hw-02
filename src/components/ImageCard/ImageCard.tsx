@@ -1,12 +1,14 @@
-import { HiOutlineThumbUp } from "react-icons/hi";
-import css from "./styles.module.css";
+import { FC } from 'react';
+import { HiOutlineThumbUp } from 'react-icons/hi';
+import css from './styles.module.css';
+import { ImageCardProps } from './ImageCard.types';
 
-export const ImageCard = ({
+export const ImageCard: FC<ImageCardProps> = ({
   src,
   alt,
   color,
   modalSrc,
-  onImageClick,
+  openModal,
   likes,
 }) => {
   return (
@@ -15,7 +17,7 @@ export const ImageCard = ({
         className={css.image}
         src={src}
         alt={alt}
-        onClick={() => onImageClick({ src: modalSrc, alt })}
+        onClick={() => openModal({ src: modalSrc, alt })}
       />
       <span className={css.likes}>
         <span>{likes}</span>

@@ -1,3 +1,7 @@
-export const ErrorMessage = ({ errorMessage }) => {
-  return <div>{errorMessage}</div>;
+export const ErrorMessage = () => {
+  return (
+    <div>
+      <p>Something went wrong! Please try again.</p>
+    </div>
+  );
 };

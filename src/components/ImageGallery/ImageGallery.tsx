@@ -1,8 +1,21 @@
-import { ImageCard } from "../ImageCard/ImageCard";
+import { FC } from 'react';
+import { ImageCard } from '../ImageCard/ImageCard';
+import css from './styles.module.css';
+import { ImageGalleryProps } from './ImageGallery.types';
 
-import css from "./styles.module.css";
+// export const ImageGallery: FC<ImageGalleryProps> = ({ images, openModal }) => {
+//   return (
+//     <ul className={css.list}>
+//       {images.map(image => (
+//         <li className={css.listItem} key={image.id}>
+//           <ImageCard dataImage={image} openModal={openModal} />
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// };
 
-export const ImageGallery = ({ images, openModal }) => {
+export const ImageGallery: FC<ImageGalleryProps> = ({ images, openModal }) => {
   return (
     <ul className={css.list}>
       {images.map(
@@ -14,7 +27,7 @@ export const ImageGallery = ({ images, openModal }) => {
               color={color}
               modalSrc={regular}
               likes={likes}
-              onImageClick={openModal}
+              openModal={openModal}
             />
           </li>
         )
