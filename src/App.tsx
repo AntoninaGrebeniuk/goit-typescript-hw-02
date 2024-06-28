@@ -10,8 +10,7 @@ import {
 } from './components';
 
 import { fetchImages } from './services/api';
-import { Image } from './types';
-import { FetchResponse } from './App.types';
+import { Image, ModalImage } from './types';
 
 export const App = () => {
   const [query, setQuery] = useState<string>('');
@@ -19,7 +18,7 @@ export const App = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [modalData, setModalData] = useState<Image | null>(null);
+  const [modalData, setModalData] = useState<ModalImage | null>(null);
 
   const [images, setImages] = useState<Image[]>([]);
 
@@ -29,8 +28,7 @@ export const App = () => {
       setIsLoading(true);
       setErrorMessage(false);
       try {
-        const { results, total_pages, total } =
-          await fetchImages<FetchResponse>(query, page);
+        const { results, total_pages, total } = await fetchImages(query, page);
 
         if (!total) return;
 
@@ -54,7 +52,7 @@ export const App = () => {
 
   const onLoadMore = () => setPage(p => p + 1);
 
-  const toggleModal = (modalData: Image | null = null) =>
+  const toggleModal = (modalData: ModalImage | null = null) =>
     setModalData(modalData);
   const closeModal = () => toggleModal();
 

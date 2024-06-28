@@ -3,18 +3,6 @@ import { ImageCard } from '../ImageCard/ImageCard';
 import css from './styles.module.css';
 import { ImageGalleryProps } from './ImageGallery.types';
 
-// export const ImageGallery: FC<ImageGalleryProps> = ({ images, openModal }) => {
-//   return (
-//     <ul className={css.list}>
-//       {images.map(image => (
-//         <li className={css.listItem} key={image.id}>
-//           <ImageCard dataImage={image} openModal={openModal} />
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
-
 export const ImageGallery: FC<ImageGalleryProps> = ({ images, openModal }) => {
   return (
     <ul className={css.list}>
